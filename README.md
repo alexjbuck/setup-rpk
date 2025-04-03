@@ -1,4 +1,7 @@
-# Install rpk GitHub Action
+# setup-rpk
+
+[![Tests](https://github.com/redpanda-data/setup-rpk/actions/workflows/test.yml/badge.svg)](https://github.com/redpanda-data/setup-rpk/actions/workflows/test.yml)
+![Coverage](badges/coverage.svg)
 
 This GitHub Action installs the `rpk` binary from Redpanda. It automatically
 detects the architecture of the runner and installs the appropriate version.

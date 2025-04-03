@@ -6,8 +6,7 @@ import fs__default from 'fs';
 import * as path from 'path';
 import path__default from 'path';
 import require$$2 from 'http';
-import * as require$$3 from 'https';
-import require$$3__default from 'https';
+import require$$3 from 'https';
 import require$$0$4 from 'net';
 import require$$1 from 'tls';
 import require$$4 from 'events';
@@ -379,7 +378,7 @@ function requireTunnel$1 () {
 	hasRequiredTunnel$1 = 1;
 	var tls = require$$1;
 	var http = require$$2;
-	var https = require$$3__default;
+	var https = require$$3;
 	var events = require$$4;
 	var util = require$$0$2;
 
@@ -24393,7 +24392,7 @@ function requireLib () {
 	Object.defineProperty(lib, "__esModule", { value: true });
 	lib.HttpClient = lib.isHttps = lib.HttpClientResponse = lib.HttpClientError = lib.getProxyUrl = lib.MediaTypes = lib.Headers = lib.HttpCodes = void 0;
 	const http = __importStar(require$$2);
-	const https = __importStar(require$$3__default);
+	const https = __importStar(require$$3);
 	const pm = __importStar(requireProxy());
 	const tunnel = __importStar(requireTunnel());
 	const undici_1 = requireUndici();
@@ -27251,6 +27250,8 @@ function requireCore () {
 
 var coreExports = requireCore();
 
+var libExports = requireLib();
+
 /**
  * Downloads a file from a URL to a local path
  * @param {string} url - The URL to download from
@@ -27258,36 +27259,27 @@ var coreExports = requireCore();
  * @returns {Promise<void>}
  */
 async function downloadFile(url, dest) {
+  const http = new libExports.HttpClient('rpk-installer');
+  const response = await http.get(url);
+
+  if (response.message.statusCode !== 200) {
+    throw new Error(`Failed to download file: ${response.message.statusCode}`)
+  }
+
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(dest);
 
-    const request = require$$3.get(url, (response) => {
-      // Handle redirects
-      if (response.statusCode === 301 || response.statusCode === 302) {
-        const redirectUrl = response.headers.location;
-        coreExports.info(`Following redirect to: ${redirectUrl}`);
-        file.close();
-        fs.unlink(dest, () => {}); // Clean up the partial file
-        return downloadFile(redirectUrl, dest)
-      }
+    response.message.pipe(file);
 
-      if (response.statusCode !== 200) {
-        file.close();
-        fs.unlink(dest, () => {}); // Clean up the partial file
-        reject(new Error(`Failed to download file: ${response.statusCode}`));
-        return
-      }
-
-      response.pipe(file);
-      file.on('finish', () => {
-        file.close();
-        resolve();
-      });
+    file.on('finish', () => {
+      file.close();
+      coreExports.info('Downloaded rpk successfully');
+      resolve();
     });
 
-    request.on('error', (err) => {
+    file.on('error', (err) => {
       file.close();
-      fs.unlink(dest, () => {}); // Delete the file if download failed
+      fs.unlink(dest, () => {}); // Clean up the partial file
       reject(err);
     });
   })
@@ -27365,6 +27357,7 @@ async function run() {
   try {
     const version = coreExports.getInput('version');
     const arch = require$$0.arch();
+    // Map x64 to amd64 for compatibility
     const archSuffix = arch === 'arm64' ? 'arm64' : 'amd64';
 
     // Determine the download URL based on version and architecture
@@ -27374,7 +27367,9 @@ async function run() {
         ? `${baseUrl}/latest/download/rpk-linux-${archSuffix}.zip`
         : `${baseUrl}/download/v${version}/rpk-linux-${archSuffix}.zip`;
 
-    coreExports.info(`Installing rpk version: ${version} for architecture: ${arch}`);
+    coreExports.info(
+      `Installing rpk version: ${version} for architecture: ${arch} (using ${archSuffix})`
+    );
 
     // Create necessary directories
     const homeDir = require$$0.homedir();
