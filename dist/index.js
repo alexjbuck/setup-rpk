@@ -1,9 +1,13 @@
-import require$$0 from 'os';
+import * as require$$0 from 'os';
+import require$$0__default from 'os';
 import require$$0$1 from 'crypto';
-import require$$1 from 'fs';
-import require$$1$5 from 'path';
-import require$$2 from 'http';
-import require$$3 from 'https';
+import * as fs from 'fs';
+import fs__default from 'fs';
+import * as require$$1 from 'path';
+import require$$1__default from 'path';
+import require$$2$1 from 'http';
+import * as require$$3 from 'https';
+import require$$3__default from 'https';
 import require$$0$4 from 'net';
 import require$$1$1 from 'tls';
 import require$$4 from 'events';
@@ -17,7 +21,7 @@ import require$$0$7 from 'node:stream';
 import require$$1$2 from 'node:util';
 import require$$0$6 from 'node:events';
 import require$$0$8 from 'worker_threads';
-import require$$2$1 from 'perf_hooks';
+import require$$2$2 from 'perf_hooks';
 import require$$5 from 'util/types';
 import require$$4$1 from 'async_hooks';
 import require$$1$3 from 'console';
@@ -25,7 +29,8 @@ import require$$1$4 from 'url';
 import require$$3$1 from 'zlib';
 import require$$6 from 'string_decoder';
 import require$$0$9 from 'diagnostics_channel';
-import require$$2$2 from 'child_process';
+import * as require$$2 from 'child_process';
+import require$$2__default from 'child_process';
 import require$$6$1 from 'timers';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -113,7 +118,7 @@ function requireCommand () {
 	};
 	Object.defineProperty(command, "__esModule", { value: true });
 	command.issue = command.issueCommand = void 0;
-	const os = __importStar(require$$0);
+	const os = __importStar(require$$0__default);
 	const utils_1 = requireUtils$1();
 	/**
 	 * Commands
@@ -222,8 +227,8 @@ function requireFileCommand () {
 	// We use any as a valid input type
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	const crypto = __importStar(require$$0$1);
-	const fs = __importStar(require$$1);
-	const os = __importStar(require$$0);
+	const fs = __importStar(fs__default);
+	const os = __importStar(require$$0__default);
 	const utils_1 = requireUtils$1();
 	function issueFileCommand(command, message) {
 	    const filePath = process.env[`GITHUB_${command}`];
@@ -373,8 +378,8 @@ function requireTunnel$1 () {
 	if (hasRequiredTunnel$1) return tunnel$1;
 	hasRequiredTunnel$1 = 1;
 	var tls = require$$1$1;
-	var http = require$$2;
-	var https = require$$3;
+	var http = require$$2$1;
+	var https = require$$3__default;
 	var events = require$$4;
 	var util = require$$0$2;
 
@@ -1092,7 +1097,7 @@ function requireUtil$6 () {
 
 	const assert = require$$0$3;
 	const { kDestroyed, kBodyUsed } = requireSymbols$4();
-	const { IncomingMessage } = require$$2;
+	const { IncomingMessage } = require$$2$1;
 	const stream = require$$0$5;
 	const net = require$$0$4;
 	const { InvalidArgumentError } = requireErrors();
@@ -3561,7 +3566,7 @@ function requireUtil$5 () {
 
 	const { redirectStatusSet, referrerPolicySet: referrerPolicyTokens, badPortsSet } = requireConstants$3();
 	const { getGlobalOrigin } = requireGlobal$1();
-	const { performance } = require$$2$1;
+	const { performance } = require$$2$2;
 	const { isBlobLike, toUSVString, ReadableStreamFrom } = requireUtil$6();
 	const assert = require$$0$3;
 	const { isUint8Array } = require$$5;
@@ -8766,7 +8771,7 @@ function requireClient () {
 
 	const assert = require$$0$3;
 	const net = require$$0$4;
-	const http = require$$2;
+	const http = require$$2$1;
 	const { pipeline } = require$$0$5;
 	const util = requireUtil$6();
 	const timers = requireTimers();
@@ -13357,7 +13362,7 @@ function requireMockUtils () {
 	  kGetNetConnect
 	} = requireMockSymbols();
 	const { buildURL, nop } = requireUtil$6();
-	const { STATUS_CODES } = require$$2;
+	const { STATUS_CODES } = require$$2$1;
 	const {
 	  types: {
 	    isPromise
@@ -17125,7 +17130,7 @@ function requireFetch () {
 	const { TransformStream } = require$$14;
 	const { getGlobalDispatcher } = requireGlobal();
 	const { webidl } = requireWebidl();
-	const { STATUS_CODES } = require$$2;
+	const { STATUS_CODES } = require$$2$1;
 	const GET_OR_HEAD = ['GET', 'HEAD'];
 
 	/** @type {import('buffer').resolveObjectURL} */
@@ -24387,8 +24392,8 @@ function requireLib () {
 	};
 	Object.defineProperty(lib, "__esModule", { value: true });
 	lib.HttpClient = lib.isHttps = lib.HttpClientResponse = lib.HttpClientError = lib.getProxyUrl = lib.MediaTypes = lib.Headers = lib.HttpCodes = void 0;
-	const http = __importStar(require$$2);
-	const https = __importStar(require$$3);
+	const http = __importStar(require$$2$1);
+	const https = __importStar(require$$3__default);
 	const pm = __importStar(requireProxy());
 	const tunnel = __importStar(requireTunnel());
 	const undici_1 = requireUndici();
@@ -25199,8 +25204,8 @@ function requireSummary () {
 		};
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.summary = exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = void 0;
-		const os_1 = require$$0;
-		const fs_1 = require$$1;
+		const os_1 = require$$0__default;
+		const fs_1 = fs__default;
 		const { access, appendFile, writeFile } = fs_1.promises;
 		exports.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
 		exports.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary';
@@ -25506,7 +25511,7 @@ function requirePathUtils () {
 	};
 	Object.defineProperty(pathUtils, "__esModule", { value: true });
 	pathUtils.toPlatformPath = pathUtils.toWin32Path = pathUtils.toPosixPath = void 0;
-	const path = __importStar(require$$1$5);
+	const path = __importStar(require$$1__default);
 	/**
 	 * toPosixPath converts the given path to the posix form. On Windows, \\ will be
 	 * replaced with /.
@@ -25592,8 +25597,8 @@ function requireIoUtil () {
 		var _a;
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.getCmdPath = exports.tryGetExecutablePath = exports.isRooted = exports.isDirectory = exports.exists = exports.READONLY = exports.UV_FS_O_EXLOCK = exports.IS_WINDOWS = exports.unlink = exports.symlink = exports.stat = exports.rmdir = exports.rm = exports.rename = exports.readlink = exports.readdir = exports.open = exports.mkdir = exports.lstat = exports.copyFile = exports.chmod = void 0;
-		const fs = __importStar(require$$1);
-		const path = __importStar(require$$1$5);
+		const fs = __importStar(fs__default);
+		const path = __importStar(require$$1__default);
 		_a = fs.promises
 		// export const {open} = 'fs'
 		, exports.chmod = _a.chmod, exports.copyFile = _a.copyFile, exports.lstat = _a.lstat, exports.mkdir = _a.mkdir, exports.open = _a.open, exports.readdir = _a.readdir, exports.readlink = _a.readlink, exports.rename = _a.rename, exports.rm = _a.rm, exports.rmdir = _a.rmdir, exports.stat = _a.stat, exports.symlink = _a.symlink, exports.unlink = _a.unlink;
@@ -25783,7 +25788,7 @@ function requireIo () {
 	Object.defineProperty(io, "__esModule", { value: true });
 	io.findInPath = io.which = io.mkdirP = io.rmRF = io.mv = io.cp = void 0;
 	const assert_1 = require$$0$3;
-	const path = __importStar(require$$1$5);
+	const path = __importStar(require$$1__default);
 	const ioUtil = __importStar(requireIoUtil());
 	/**
 	 * Copies a file or folder.
@@ -26088,10 +26093,10 @@ function requireToolrunner () {
 	};
 	Object.defineProperty(toolrunner, "__esModule", { value: true });
 	toolrunner.argStringToArray = toolrunner.ToolRunner = void 0;
-	const os = __importStar(require$$0);
+	const os = __importStar(require$$0__default);
 	const events = __importStar(require$$4);
-	const child = __importStar(require$$2$2);
-	const path = __importStar(require$$1$5);
+	const child = __importStar(require$$2__default);
+	const path = __importStar(require$$1__default);
 	const io = __importStar(requireIo());
 	const ioUtil = __importStar(requireIoUtil());
 	const timers_1 = require$$6$1;
@@ -26831,7 +26836,7 @@ function requirePlatform () {
 		};
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.getDetails = exports.isLinux = exports.isMacOS = exports.isWindows = exports.arch = exports.platform = void 0;
-		const os_1 = __importDefault(require$$0);
+		const os_1 = __importDefault(require$$0__default);
 		const exec = __importStar(requireExec());
 		const getWindowsInfo = () => __awaiter(void 0, void 0, void 0, function* () {
 		    const { stdout: version } = yield exec.getExecOutput('powershell -command "(Get-CimInstance -ClassName Win32_OperatingSystem).Version"', undefined, {
@@ -26934,8 +26939,8 @@ function requireCore () {
 		const command_1 = requireCommand();
 		const file_command_1 = requireFileCommand();
 		const utils_1 = requireUtils$1();
-		const os = __importStar(require$$0);
-		const path = __importStar(require$$1$5);
+		const os = __importStar(require$$0__default);
+		const path = __importStar(require$$1__default);
 		const oidc_utils_1 = requireOidcUtils();
 		/**
 		 * The code to exit an action
@@ -27247,16 +27252,50 @@ function requireCore () {
 var coreExports = requireCore();
 
 /**
- * Waits for a number of milliseconds.
- *
- * @param {number} milliseconds The number of milliseconds to wait.
- * @returns {Promise<string>} Resolves with 'done!' after the wait is over.
+ * Downloads a file from a URL to a local path
+ * @param {string} url - The URL to download from
+ * @param {string} dest - The destination path
+ * @returns {Promise<void>}
  */
-async function wait(milliseconds) {
-  return new Promise((resolve) => {
-    if (isNaN(milliseconds)) throw new Error('milliseconds is not a number')
+async function downloadFile(url, dest) {
+  return new Promise((resolve, reject) => {
+    const file = fs.createWriteStream(dest);
+    require$$3
+      .get(url, (response) => {
+        if (response.statusCode !== 200) {
+          reject(new Error(`Failed to download file: ${response.statusCode}`));
+          return
+        }
+        response.pipe(file);
+        file.on('finish', () => {
+          file.close();
+          resolve();
+        });
+      })
+      .on('error', (err) => {
+        fs.unlink(dest, () => {}); // Delete the file if download failed
+        reject(err);
+      });
+  })
+}
 
-    setTimeout(() => resolve('done!'), milliseconds);
+/**
+ * Unzips a file to a destination directory
+ * @param {string} zipPath - Path to the zip file
+ * @param {string} destDir - Destination directory
+ * @returns {Promise<void>}
+ */
+async function unzipFile(zipPath, destDir) {
+  return new Promise((resolve, reject) => {
+    const unzip = require$$2.spawn('unzip', ['-o', zipPath, '-d', destDir]);
+    unzip.on('close', (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`unzip failed with code ${code}`));
+      }
+    });
+    unzip.on('error', reject);
   })
 }
 
@@ -27267,18 +27306,42 @@ async function wait(milliseconds) {
  */
 async function run() {
   try {
-    const ms = coreExports.getInput('milliseconds');
+    const version = coreExports.getInput('version');
+    const arch = require$$0.arch();
+    const archSuffix = arch === 'arm64' ? 'arm64' : 'amd64';
 
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    coreExports.debug(`Waiting ${ms} milliseconds ...`);
+    // Determine the download URL based on version and architecture
+    const baseUrl = 'https://github.com/redpanda-data/redpanda/releases';
+    const downloadUrl =
+      version === 'latest'
+        ? `${baseUrl}/latest/download/rpk-linux-${archSuffix}.zip`
+        : `${baseUrl}/download/v${version}/rpk-linux-${archSuffix}.zip`;
 
-    // Log the current timestamp, wait, then log the new timestamp
-    coreExports.debug(new Date().toTimeString());
-    await wait(parseInt(ms, 10));
-    coreExports.debug(new Date().toTimeString());
+    coreExports.info(`Installing rpk version: ${version} for architecture: ${arch}`);
 
-    // Set outputs for other workflow steps to use
-    coreExports.setOutput('time', new Date().toTimeString());
+    // Create necessary directories
+    const homeDir = require$$0.homedir();
+    const binDir = require$$1.join(homeDir, '.local', 'bin');
+    const zipPath = require$$1.join(process.cwd(), `rpk-linux-${archSuffix}.zip`);
+
+    if (!fs.existsSync(binDir)) {
+      fs.mkdirSync(binDir, { recursive: true });
+    }
+
+    // Download and install rpk
+    coreExports.info('Downloading rpk...');
+    await downloadFile(downloadUrl, zipPath);
+
+    coreExports.info('Installing rpk...');
+    await unzipFile(zipPath, binDir);
+
+    // Add ~/.local/bin to PATH
+    coreExports.addPath(binDir);
+
+    // Clean up the downloaded zip file
+    fs.unlinkSync(zipPath);
+
+    coreExports.info('rpk installation completed successfully');
   } catch (error) {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) coreExports.setFailed(error.message);
