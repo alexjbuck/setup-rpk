@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
-import { wait } from './wait.js'
+import * as exec from '@actions/exec'
+import * as os from 'os'
 
 /**
  * The main function for the action.
@@ -8,18 +9,35 @@ import { wait } from './wait.js'
  */
 export async function run() {
   try {
-    const ms = core.getInput('milliseconds')
+    const version = core.getInput('version')
+    const arch = os.arch()
+    const archSuffix = arch === 'arm64' ? 'arm64' : 'amd64'
 
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Waiting ${ms} milliseconds ...`)
+    // Determine the download URL based on version and architecture
+    const baseUrl = 'https://github.com/redpanda-data/redpanda/releases'
+    const downloadUrl =
+      version === 'latest'
+        ? `${baseUrl}/latest/download/rpk-linux-${archSuffix}.zip`
+        : `${baseUrl}/download/v${version}/rpk-linux-${archSuffix}.zip`
 
-    // Log the current timestamp, wait, then log the new timestamp
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    core.info(`Installing rpk version: ${version} for architecture: ${arch}`)
 
-    // Set outputs for other workflow steps to use
-    core.setOutput('time', new Date().toTimeString())
+    // Download and install rpk
+    await exec.exec('curl', ['-LO', downloadUrl])
+    await exec.exec('mkdir', ['-p', '~/.local/bin'])
+    await exec.exec('unzip', [
+      `rpk-linux-${archSuffix}.zip`,
+      '-d',
+      '~/.local/bin/'
+    ])
+
+    // Add ~/.local/bin to PATH
+    core.addPath('~/.local/bin')
+
+    // Clean up the downloaded zip file
+    await exec.exec('rm', [`rpk-linux-${archSuffix}.zip`])
+
+    core.info('rpk installation completed successfully')
   } catch (error) {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)
