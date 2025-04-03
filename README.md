@@ -1,6 +1,6 @@
 # setup-rpk
 
-[![Tests](https://github.com/redpanda-data/setup-rpk/actions/workflows/test.yml/badge.svg)](https://github.com/redpanda-data/setup-rpk/actions/workflows/test.yml)
+[![Tests](https://github.com/redpanda-data/setup-rpk/actions/workflows/ci.yml/badge.svg)](https://github.com/redpanda-data/setup-rpk/actions/workflows/ci.yml)
 ![Coverage](badges/coverage.svg)
 
 This GitHub Action installs the `rpk` binary from Redpanda. It automatically
