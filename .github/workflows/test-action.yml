@@ -1,0 +1,55 @@
+name: Test rpk Installation Action
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test-latest:
+    name: Test Latest Version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test rpk installation (latest)
+        uses: ./
+        with:
+          version: latest
+      - name: Verify rpk installation
+        run: |
+          rpk version
+          which rpk
+
+  test-specific-version:
+    name: Test Specific Version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test rpk installation (specific version)
+        uses: ./
+        with:
+          version: 23.2.1
+      - name: Verify rpk installation
+        run: |
+          rpk version
+          which rpk
+          # Verify the version matches what we requested
+          rpk version | grep -q "v23.2.1"
+
+  test-arm64:
+    name: Test on ARM64
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Test rpk installation on ARM64
+        uses: ./
+        with:
+          version: latest
+      - name: Verify rpk installation
+        run: |
+          rpk version
+          which rpk
