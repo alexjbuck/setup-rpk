@@ -35,6 +35,7 @@ async function downloadFile(url, dest) {
       response.pipe(file)
       file.on('finish', () => {
         file.close()
+        core.info('Downloaded rpk successfully')
         resolve()
       })
     })
@@ -42,6 +43,7 @@ async function downloadFile(url, dest) {
     request.on('error', (err) => {
       file.close()
       fs.unlink(dest, () => {}) // Delete the file if download failed
+      core.error(`Failed to download file: ${err.message}`)
       reject(err)
     })
   })
