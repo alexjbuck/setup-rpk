@@ -14,22 +14,36 @@ import * as child_process from 'child_process'
 async function downloadFile(url, dest) {
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(dest)
-    https
-      .get(url, (response) => {
-        if (response.statusCode !== 200) {
-          reject(new Error(`Failed to download file: ${response.statusCode}`))
-          return
-        }
-        response.pipe(file)
-        file.on('finish', () => {
-          file.close()
-          resolve()
-        })
+
+    const request = https.get(url, (response) => {
+      // Handle redirects
+      if (response.statusCode === 301 || response.statusCode === 302) {
+        const redirectUrl = response.headers.location
+        core.info(`Following redirect to: ${redirectUrl}`)
+        file.close()
+        fs.unlink(dest, () => {}) // Clean up the partial file
+        return downloadFile(redirectUrl, dest)
+      }
+
+      if (response.statusCode !== 200) {
+        file.close()
+        fs.unlink(dest, () => {}) // Clean up the partial file
+        reject(new Error(`Failed to download file: ${response.statusCode}`))
+        return
+      }
+
+      response.pipe(file)
+      file.on('finish', () => {
+        file.close()
+        resolve()
       })
-      .on('error', (err) => {
-        fs.unlink(dest, () => {}) // Delete the file if download failed
-        reject(err)
-      })
+    })
+
+    request.on('error', (err) => {
+      file.close()
+      fs.unlink(dest, () => {}) // Delete the file if download failed
+      reject(err)
+    })
   })
 }
 
