@@ -2,8 +2,8 @@ import * as core from '@actions/core'
 import * as os from 'os'
 import * as fs from 'fs'
 import * as path from 'path'
-import * as https from 'https'
 import * as child_process from 'child_process'
+import { HttpClient } from '@actions/http-client'
 
 /**
  * Downloads a file from a URL to a local path
@@ -12,38 +12,27 @@ import * as child_process from 'child_process'
  * @returns {Promise<void>}
  */
 async function downloadFile(url, dest) {
+  const http = new HttpClient('rpk-installer')
+  const response = await http.get(url)
+
+  if (response.message.statusCode !== 200) {
+    throw new Error(`Failed to download file: ${response.message.statusCode}`)
+  }
+
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(dest)
 
-    const request = https.get(url, (response) => {
-      // Handle redirects
-      if (response.statusCode === 301 || response.statusCode === 302) {
-        const redirectUrl = response.headers.location
-        core.info(`Following redirect to: ${redirectUrl}`)
-        file.close()
-        fs.unlink(dest, () => {}) // Clean up the partial file
-        return downloadFile(redirectUrl, dest)
-      }
+    response.message.pipe(file)
 
-      if (response.statusCode !== 200) {
-        file.close()
-        fs.unlink(dest, () => {}) // Clean up the partial file
-        reject(new Error(`Failed to download file: ${response.statusCode}`))
-        return
-      }
-
-      response.pipe(file)
-      file.on('finish', () => {
-        file.close()
-        core.info('Downloaded rpk successfully')
-        resolve()
-      })
+    file.on('finish', () => {
+      file.close()
+      core.info('Downloaded rpk successfully')
+      resolve()
     })
 
-    request.on('error', (err) => {
+    file.on('error', (err) => {
       file.close()
-      fs.unlink(dest, () => {}) // Delete the file if download failed
-      core.error(`Failed to download file: ${err.message}`)
+      fs.unlink(dest, () => {}) // Clean up the partial file
       reject(err)
     })
   })
@@ -121,6 +110,7 @@ export async function run() {
   try {
     const version = core.getInput('version')
     const arch = os.arch()
+    // Map x64 to amd64 for compatibility
     const archSuffix = arch === 'arm64' ? 'arm64' : 'amd64'
 
     // Determine the download URL based on version and architecture
@@ -130,7 +120,9 @@ export async function run() {
         ? `${baseUrl}/latest/download/rpk-linux-${archSuffix}.zip`
         : `${baseUrl}/download/v${version}/rpk-linux-${archSuffix}.zip`
 
-    core.info(`Installing rpk version: ${version} for architecture: ${arch}`)
+    core.info(
+      `Installing rpk version: ${version} for architecture: ${arch} (using ${archSuffix})`
+    )
 
     // Create necessary directories
     const homeDir = os.homedir()
