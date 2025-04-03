@@ -8,7 +8,8 @@ jest.unstable_mockModule('@actions/core', () => ({
   getInput: jest.fn(),
   setFailed: jest.fn(),
   info: jest.fn(),
-  addPath: jest.fn()
+  addPath: jest.fn(),
+  error: jest.fn()
 }))
 
 jest.unstable_mockModule('fs', () => ({
@@ -16,7 +17,8 @@ jest.unstable_mockModule('fs', () => ({
   mkdirSync: jest.fn(),
   existsSync: jest.fn(),
   unlinkSync: jest.fn(),
-  unlink: jest.fn()
+  unlink: jest.fn(),
+  chmodSync: jest.fn()
 }))
 
 jest.unstable_mockModule('https', () => ({
@@ -48,6 +50,7 @@ describe('rpk installer', () => {
   let mockResponse
   let mockUnzip
   let mockRequest
+  let mockRpk
 
   beforeEach(() => {
     jest.clearAllMocks()
@@ -106,7 +109,28 @@ describe('rpk installer', () => {
         return mockUnzip
       })
     }
-    child_process.spawn.mockReturnValue(mockUnzip)
+
+    // Setup mock for rpk verification
+    mockRpk = {
+      on: jest.fn((event, handler) => {
+        if (event === 'error') {
+          mockRpk.errorHandler = handler
+        } else if (event === 'close') {
+          mockRpk.closeHandler = handler
+        }
+        return mockRpk
+      })
+    }
+
+    child_process.spawn.mockImplementation((cmd) => {
+      if (cmd === 'unzip') return mockUnzip
+      if (cmd === path.join('/home/user', '.local', 'bin', 'rpk'))
+        return mockRpk
+      return mockUnzip
+    })
+
+    // Setup mock for fs functions
+    fs.existsSync.mockReturnValue(true)
 
     // Setup mock for os functions
     os.arch.mockReturnValue('amd64')
@@ -118,6 +142,13 @@ describe('rpk installer', () => {
 
   describe('successful installation', () => {
     test('installs latest version', async () => {
+      // Mock fs.existsSync to return false for binDir but true for rpk binary
+      fs.existsSync.mockImplementation((p) => {
+        if (p === path.join('/home/user', '.local', 'bin')) return false
+        if (p === path.join('/home/user', '.local', 'bin', 'rpk')) return true
+        return false
+      })
+
       // Simulate successful download
       mockResponse.pipe.mockImplementation(() => {
         setTimeout(() => mockWriteStream.finishHandler(), 0)
@@ -132,6 +163,14 @@ describe('rpk installer', () => {
         return mockUnzip
       })
 
+      // Simulate successful rpk verification
+      mockRpk.on.mockImplementation((event, handler) => {
+        if (event === 'close') {
+          setTimeout(() => handler(0), 0)
+        }
+        return mockRpk
+      })
+
       await run()
 
       expect(https.get).toHaveBeenCalledWith(
@@ -144,6 +183,10 @@ describe('rpk installer', () => {
       )
       expect(core.addPath).toHaveBeenCalledWith(
         path.join('/home/user', '.local', 'bin')
+      )
+      expect(fs.chmodSync).toHaveBeenCalledWith(
+        path.join('/home/user', '.local', 'bin', 'rpk'),
+        '755'
       )
       expect(fs.unlinkSync).toHaveBeenCalled()
     })
@@ -163,6 +206,14 @@ describe('rpk installer', () => {
           setTimeout(() => handler(0), 0)
         }
         return mockUnzip
+      })
+
+      // Simulate successful rpk verification
+      mockRpk.on.mockImplementation((event, handler) => {
+        if (event === 'close') {
+          setTimeout(() => handler(0), 0)
+        }
+        return mockRpk
       })
 
       await run()
@@ -252,6 +303,88 @@ describe('rpk installer', () => {
       await run()
 
       expect(core.setFailed).toHaveBeenCalledWith('Unzip process error')
+    })
+
+    test('handles rpk verification failure', async () => {
+      // Simulate successful download
+      mockResponse.pipe.mockImplementation(() => {
+        setTimeout(() => mockWriteStream.finishHandler(), 0)
+        return mockResponse
+      })
+
+      // Simulate successful unzip
+      mockUnzip.on.mockImplementation((event, handler) => {
+        if (event === 'close') {
+          setTimeout(() => handler(0), 0)
+        }
+        return mockUnzip
+      })
+
+      // Simulate rpk verification failure
+      mockRpk.on.mockImplementation((event, handler) => {
+        if (event === 'close') {
+          setTimeout(() => handler(1), 0)
+        }
+        return mockRpk
+      })
+
+      await run()
+
+      expect(core.setFailed).toHaveBeenCalledWith(
+        'rpk installation verification failed'
+      )
+    })
+
+    test('handles missing rpk binary', async () => {
+      // Simulate successful download
+      mockResponse.pipe.mockImplementation(() => {
+        setTimeout(() => mockWriteStream.finishHandler(), 0)
+        return mockResponse
+      })
+
+      // Simulate successful unzip
+      mockUnzip.on.mockImplementation((event, handler) => {
+        if (event === 'close') {
+          setTimeout(() => handler(0), 0)
+        }
+        return mockUnzip
+      })
+
+      // Simulate missing rpk binary
+      fs.existsSync.mockReturnValue(false)
+
+      await run()
+
+      expect(core.setFailed).toHaveBeenCalledWith(
+        'rpk installation verification failed'
+      )
+    })
+
+    test('handles chmod failure', async () => {
+      // Simulate successful download
+      mockResponse.pipe.mockImplementation(() => {
+        setTimeout(() => mockWriteStream.finishHandler(), 0)
+        return mockResponse
+      })
+
+      // Simulate successful unzip
+      mockUnzip.on.mockImplementation((event, handler) => {
+        if (event === 'close') {
+          setTimeout(() => handler(0), 0)
+        }
+        return mockUnzip
+      })
+
+      // Simulate chmod failure
+      fs.chmodSync.mockImplementation(() => {
+        throw new Error('chmod failed')
+      })
+
+      await run()
+
+      expect(core.setFailed).toHaveBeenCalledWith(
+        'rpk installation verification failed'
+      )
     })
   })
 })

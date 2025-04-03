@@ -3,13 +3,13 @@ import require$$0__default from 'os';
 import require$$0$1 from 'crypto';
 import * as fs from 'fs';
 import fs__default from 'fs';
-import * as require$$1 from 'path';
-import require$$1__default from 'path';
-import require$$2$1 from 'http';
+import * as path from 'path';
+import path__default from 'path';
+import require$$2 from 'http';
 import * as require$$3 from 'https';
 import require$$3__default from 'https';
 import require$$0$4 from 'net';
-import require$$1$1 from 'tls';
+import require$$1 from 'tls';
 import require$$4 from 'events';
 import require$$0$3 from 'assert';
 import require$$0$2 from 'util';
@@ -18,19 +18,19 @@ import require$$7 from 'buffer';
 import require$$8 from 'querystring';
 import require$$14 from 'stream/web';
 import require$$0$7 from 'node:stream';
-import require$$1$2 from 'node:util';
+import require$$1$1 from 'node:util';
 import require$$0$6 from 'node:events';
 import require$$0$8 from 'worker_threads';
-import require$$2$2 from 'perf_hooks';
+import require$$2$1 from 'perf_hooks';
 import require$$5 from 'util/types';
 import require$$4$1 from 'async_hooks';
-import require$$1$3 from 'console';
-import require$$1$4 from 'url';
+import require$$1$2 from 'console';
+import require$$1$3 from 'url';
 import require$$3$1 from 'zlib';
 import require$$6 from 'string_decoder';
 import require$$0$9 from 'diagnostics_channel';
-import * as require$$2 from 'child_process';
-import require$$2__default from 'child_process';
+import * as child_process from 'child_process';
+import child_process__default from 'child_process';
 import require$$6$1 from 'timers';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -377,8 +377,8 @@ var hasRequiredTunnel$1;
 function requireTunnel$1 () {
 	if (hasRequiredTunnel$1) return tunnel$1;
 	hasRequiredTunnel$1 = 1;
-	var tls = require$$1$1;
-	var http = require$$2$1;
+	var tls = require$$1;
+	var http = require$$2;
 	var https = require$$3__default;
 	var events = require$$4;
 	var util = require$$0$2;
@@ -1097,7 +1097,7 @@ function requireUtil$6 () {
 
 	const assert = require$$0$3;
 	const { kDestroyed, kBodyUsed } = requireSymbols$4();
-	const { IncomingMessage } = require$$2$1;
+	const { IncomingMessage } = require$$2;
 	const stream = require$$0$5;
 	const net = require$$0$4;
 	const { InvalidArgumentError } = requireErrors();
@@ -1759,7 +1759,7 @@ function requireSbmh () {
 	 * by Hongli Lai at: https://github.com/FooBarWidget/boyer-moore-horspool
 	 */
 	const EventEmitter = require$$0$6.EventEmitter;
-	const inherits = require$$1$2.inherits;
+	const inherits = require$$1$1.inherits;
 
 	function SBMH (needle) {
 	  if (typeof needle === 'string') {
@@ -1968,7 +1968,7 @@ function requirePartStream () {
 	if (hasRequiredPartStream) return PartStream_1;
 	hasRequiredPartStream = 1;
 
-	const inherits = require$$1$2.inherits;
+	const inherits = require$$1$1.inherits;
 	const ReadableStream = require$$0$7.Readable;
 
 	function PartStream (opts) {
@@ -2014,7 +2014,7 @@ function requireHeaderParser () {
 	hasRequiredHeaderParser = 1;
 
 	const EventEmitter = require$$0$6.EventEmitter;
-	const inherits = require$$1$2.inherits;
+	const inherits = require$$1$1.inherits;
 	const getLimit = requireGetLimit();
 
 	const StreamSearch = requireSbmh();
@@ -2122,7 +2122,7 @@ function requireDicer () {
 	hasRequiredDicer = 1;
 
 	const WritableStream = require$$0$7.Writable;
-	const inherits = require$$1$2.inherits;
+	const inherits = require$$1$1.inherits;
 
 	const StreamSearch = requireSbmh();
 
@@ -2699,7 +2699,7 @@ function requireMultipart () {
 	//     -- this will require modifications to utils.parseParams
 
 	const { Readable } = require$$0$7;
-	const { inherits } = require$$1$2;
+	const { inherits } = require$$1$1;
 
 	const Dicer = requireDicer();
 
@@ -3265,7 +3265,7 @@ function requireMain () {
 	hasRequiredMain = 1;
 
 	const WritableStream = require$$0$7.Writable;
-	const { inherits } = require$$1$2;
+	const { inherits } = require$$1$1;
 	const Dicer = requireDicer();
 
 	const MultipartParser = requireMultipart();
@@ -3566,7 +3566,7 @@ function requireUtil$5 () {
 
 	const { redirectStatusSet, referrerPolicySet: referrerPolicyTokens, badPortsSet } = requireConstants$3();
 	const { getGlobalOrigin } = requireGlobal$1();
-	const { performance } = require$$2$2;
+	const { performance } = require$$2$1;
 	const { isBlobLike, toUSVString, ReadableStreamFrom } = requireUtil$6();
 	const assert = require$$0$3;
 	const { isUint8Array } = require$$5;
@@ -8089,7 +8089,7 @@ function requireConnect () {
 	    let socket;
 	    if (protocol === 'https:') {
 	      if (!tls) {
-	        tls = require$$1$1;
+	        tls = require$$1;
 	      }
 	      servername = servername || options.servername || util.getServerName(host) || null;
 
@@ -8771,7 +8771,7 @@ function requireClient () {
 
 	const assert = require$$0$3;
 	const net = require$$0$4;
-	const http = require$$2$1;
+	const http = require$$2;
 	const { pipeline } = require$$0$5;
 	const util = requireUtil$6();
 	const timers = requireTimers();
@@ -13362,7 +13362,7 @@ function requireMockUtils () {
 	  kGetNetConnect
 	} = requireMockSymbols();
 	const { buildURL, nop } = requireUtil$6();
-	const { STATUS_CODES } = require$$2$1;
+	const { STATUS_CODES } = require$$2;
 	const {
 	  types: {
 	    isPromise
@@ -14099,7 +14099,7 @@ function requirePendingInterceptorsFormatter () {
 	hasRequiredPendingInterceptorsFormatter = 1;
 
 	const { Transform } = require$$0$5;
-	const { Console } = require$$1$3;
+	const { Console } = require$$1$2;
 
 	/**
 	 * Gets the output of `console.table(…)` as a string.
@@ -14326,7 +14326,7 @@ function requireProxyAgent () {
 	hasRequiredProxyAgent = 1;
 
 	const { kProxy, kClose, kDestroy, kInterceptors } = requireSymbols$4();
-	const { URL } = require$$1$4;
+	const { URL } = require$$1$3;
 	const Agent = requireAgent();
 	const Pool = requirePool();
 	const DispatcherBase = requireDispatcherBase();
@@ -17130,7 +17130,7 @@ function requireFetch () {
 	const { TransformStream } = require$$14;
 	const { getGlobalDispatcher } = requireGlobal();
 	const { webidl } = requireWebidl();
-	const { STATUS_CODES } = require$$2$1;
+	const { STATUS_CODES } = require$$2;
 	const GET_OR_HEAD = ['GET', 'HEAD'];
 
 	/** @type {import('buffer').resolveObjectURL} */
@@ -24392,7 +24392,7 @@ function requireLib () {
 	};
 	Object.defineProperty(lib, "__esModule", { value: true });
 	lib.HttpClient = lib.isHttps = lib.HttpClientResponse = lib.HttpClientError = lib.getProxyUrl = lib.MediaTypes = lib.Headers = lib.HttpCodes = void 0;
-	const http = __importStar(require$$2$1);
+	const http = __importStar(require$$2);
 	const https = __importStar(require$$3__default);
 	const pm = __importStar(requireProxy());
 	const tunnel = __importStar(requireTunnel());
@@ -25511,7 +25511,7 @@ function requirePathUtils () {
 	};
 	Object.defineProperty(pathUtils, "__esModule", { value: true });
 	pathUtils.toPlatformPath = pathUtils.toWin32Path = pathUtils.toPosixPath = void 0;
-	const path = __importStar(require$$1__default);
+	const path = __importStar(path__default);
 	/**
 	 * toPosixPath converts the given path to the posix form. On Windows, \\ will be
 	 * replaced with /.
@@ -25598,7 +25598,7 @@ function requireIoUtil () {
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.getCmdPath = exports.tryGetExecutablePath = exports.isRooted = exports.isDirectory = exports.exists = exports.READONLY = exports.UV_FS_O_EXLOCK = exports.IS_WINDOWS = exports.unlink = exports.symlink = exports.stat = exports.rmdir = exports.rm = exports.rename = exports.readlink = exports.readdir = exports.open = exports.mkdir = exports.lstat = exports.copyFile = exports.chmod = void 0;
 		const fs = __importStar(fs__default);
-		const path = __importStar(require$$1__default);
+		const path = __importStar(path__default);
 		_a = fs.promises
 		// export const {open} = 'fs'
 		, exports.chmod = _a.chmod, exports.copyFile = _a.copyFile, exports.lstat = _a.lstat, exports.mkdir = _a.mkdir, exports.open = _a.open, exports.readdir = _a.readdir, exports.readlink = _a.readlink, exports.rename = _a.rename, exports.rm = _a.rm, exports.rmdir = _a.rmdir, exports.stat = _a.stat, exports.symlink = _a.symlink, exports.unlink = _a.unlink;
@@ -25788,7 +25788,7 @@ function requireIo () {
 	Object.defineProperty(io, "__esModule", { value: true });
 	io.findInPath = io.which = io.mkdirP = io.rmRF = io.mv = io.cp = void 0;
 	const assert_1 = require$$0$3;
-	const path = __importStar(require$$1__default);
+	const path = __importStar(path__default);
 	const ioUtil = __importStar(requireIoUtil());
 	/**
 	 * Copies a file or folder.
@@ -26095,8 +26095,8 @@ function requireToolrunner () {
 	toolrunner.argStringToArray = toolrunner.ToolRunner = void 0;
 	const os = __importStar(require$$0__default);
 	const events = __importStar(require$$4);
-	const child = __importStar(require$$2__default);
-	const path = __importStar(require$$1__default);
+	const child = __importStar(child_process__default);
+	const path = __importStar(path__default);
 	const io = __importStar(requireIo());
 	const ioUtil = __importStar(requireIoUtil());
 	const timers_1 = require$$6$1;
@@ -26940,7 +26940,7 @@ function requireCore () {
 		const file_command_1 = requireFileCommand();
 		const utils_1 = requireUtils$1();
 		const os = __importStar(require$$0__default);
-		const path = __importStar(require$$1__default);
+		const path = __importStar(path__default);
 		const oidc_utils_1 = requireOidcUtils();
 		/**
 		 * The code to exit an action
@@ -27301,7 +27301,7 @@ async function downloadFile(url, dest) {
  */
 async function unzipFile(zipPath, destDir) {
   return new Promise((resolve, reject) => {
-    const unzip = require$$2.spawn('unzip', ['-o', zipPath, '-d', destDir]);
+    const unzip = child_process.spawn('unzip', ['-o', zipPath, '-d', destDir]);
     unzip.on('close', (code) => {
       if (code === 0) {
         resolve();
@@ -27310,6 +27310,49 @@ async function unzipFile(zipPath, destDir) {
       }
     });
     unzip.on('error', reject);
+  })
+}
+
+/**
+ * Verifies that rpk is installed and executable
+ * @param {string} binDir - Directory containing the rpk binary
+ * @returns {Promise<boolean>} - True if verification succeeds
+ */
+async function verifyInstallation(binDir) {
+  return new Promise((resolve) => {
+    const rpkPath = path.join(binDir, 'rpk');
+
+    // Check if the binary exists
+    if (!fs.existsSync(rpkPath)) {
+      coreExports.error(`rpk binary not found at ${rpkPath}`);
+      resolve(false);
+      return
+    }
+
+    // Make the binary executable
+    try {
+      fs.chmodSync(rpkPath, '755');
+    } catch (error) {
+      coreExports.error(`Failed to make rpk executable: ${error.message}`);
+      resolve(false);
+      return
+    }
+
+    // Try to run rpk --version
+    const rpk = child_process.spawn(rpkPath, ['--version']);
+    rpk.on('close', (code) => {
+      if (code === 0) {
+        coreExports.info('rpk installation verified successfully');
+        resolve(true);
+      } else {
+        coreExports.error(`rpk verification failed with code ${code}`);
+        resolve(false);
+      }
+    });
+    rpk.on('error', (error) => {
+      coreExports.error(`Failed to run rpk: ${error.message}`);
+      resolve(false);
+    });
   })
 }
 
@@ -27335,8 +27378,8 @@ async function run() {
 
     // Create necessary directories
     const homeDir = require$$0.homedir();
-    const binDir = require$$1.join(homeDir, '.local', 'bin');
-    const zipPath = require$$1.join(process.cwd(), `rpk-linux-${archSuffix}.zip`);
+    const binDir = path.join(homeDir, '.local', 'bin');
+    const zipPath = path.join(process.cwd(), `rpk-linux-${archSuffix}.zip`);
 
     if (!fs.existsSync(binDir)) {
       fs.mkdirSync(binDir, { recursive: true });
@@ -27351,6 +27394,13 @@ async function run() {
 
     // Add ~/.local/bin to PATH
     coreExports.addPath(binDir);
+    coreExports.info(`Added ${binDir} to PATH`);
+
+    // Verify the installation
+    const verified = await verifyInstallation(binDir);
+    if (!verified) {
+      throw new Error('rpk installation verification failed')
+    }
 
     // Clean up the downloaded zip file
     fs.unlinkSync(zipPath);

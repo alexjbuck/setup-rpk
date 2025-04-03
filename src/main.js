@@ -68,6 +68,49 @@ async function unzipFile(zipPath, destDir) {
 }
 
 /**
+ * Verifies that rpk is installed and executable
+ * @param {string} binDir - Directory containing the rpk binary
+ * @returns {Promise<boolean>} - True if verification succeeds
+ */
+async function verifyInstallation(binDir) {
+  return new Promise((resolve) => {
+    const rpkPath = path.join(binDir, 'rpk')
+
+    // Check if the binary exists
+    if (!fs.existsSync(rpkPath)) {
+      core.error(`rpk binary not found at ${rpkPath}`)
+      resolve(false)
+      return
+    }
+
+    // Make the binary executable
+    try {
+      fs.chmodSync(rpkPath, '755')
+    } catch (error) {
+      core.error(`Failed to make rpk executable: ${error.message}`)
+      resolve(false)
+      return
+    }
+
+    // Try to run rpk --version
+    const rpk = child_process.spawn(rpkPath, ['--version'])
+    rpk.on('close', (code) => {
+      if (code === 0) {
+        core.info('rpk installation verified successfully')
+        resolve(true)
+      } else {
+        core.error(`rpk verification failed with code ${code}`)
+        resolve(false)
+      }
+    })
+    rpk.on('error', (error) => {
+      core.error(`Failed to run rpk: ${error.message}`)
+      resolve(false)
+    })
+  })
+}
+
+/**
  * The main function for the action.
  *
  * @returns {Promise<void>} Resolves when the action is complete.
@@ -105,6 +148,13 @@ export async function run() {
 
     // Add ~/.local/bin to PATH
     core.addPath(binDir)
+    core.info(`Added ${binDir} to PATH`)
+
+    // Verify the installation
+    const verified = await verifyInstallation(binDir)
+    if (!verified) {
+      throw new Error('rpk installation verification failed')
+    }
 
     // Clean up the downloaded zip file
     fs.unlinkSync(zipPath)
