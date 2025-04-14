@@ -57,6 +57,11 @@ jobs:
         run: |
           echo "Node version: $(node --version)"
           echo "Yarn version: $(yarn --version)"
+          echo "Current directory: $(pwd)"
+          echo "Directory structure:"
+          ls -la
+          echo "Yarn cache location:"
+          yarn cache dir
           echo "Git config:"
           git config --list
           echo "File permissions:"

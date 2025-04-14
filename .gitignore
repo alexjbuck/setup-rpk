@@ -103,6 +103,3 @@ __tests__/runner/*
 
 # Ignore yarn.lock
 .yarn
-
-# Ignore pnp
-.pnp*
