@@ -16,11 +16,9 @@ const config = {
     format: 'es',
     sourcemap: true,
     sourcemapExcludeSources: false,
-    // Use a path that's relative to the project root
+    // Use absolute paths in source maps to ensure consistency across environments
     sourcemapPathTransform: (relativeSourcePath) => {
-      // Remove any leading ../ from the path to make it relative to project root
-      const cleanPath = relativeSourcePath.replace(/^\.\.\//, '')
-      return cleanPath
+      return resolve(__dirname, relativeSourcePath)
     }
   },
   plugins: [commonjs(), nodeResolve({ preferBuiltins: true })]
