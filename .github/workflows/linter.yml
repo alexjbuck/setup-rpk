@@ -31,6 +31,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Enable Corepack
+        id: enable-corepack
+        run: corepack enable
+
       # Setup Node.js using the version specified in `.node-version`.
       - name: Setup Node.js
         id: setup-node

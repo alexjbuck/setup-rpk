@@ -21,6 +21,10 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
+      - name: Enable Corepack
+        id: enable-corepack
+        run: corepack enable
+
       - name: Setup Node.js
         id: setup-node
         uses: actions/setup-node@v4
