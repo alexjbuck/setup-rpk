@@ -101,5 +101,5 @@ __tests__/runner/*
 .idea
 *.code-workspace
 
-# Ignore yarn.lock
+# Ignore .yarn
 .yarn
