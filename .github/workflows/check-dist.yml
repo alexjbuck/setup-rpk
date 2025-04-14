@@ -52,21 +52,6 @@ jobs:
         id: build
         run: yarn bundle
 
-      - name: Debug Info
-        id: debug
-        run: |
-          echo "Node version: $(node --version)"
-          echo "Yarn version: $(yarn --version)"
-          echo "Current directory: $(pwd)"
-          echo "Directory structure:"
-          ls -la
-          echo "Git config:"
-          git config --list
-          echo "File permissions:"
-          ls -la dist/
-          echo "Git file modes:"
-          git ls-files --stage dist/
-
       # This will fail the workflow if the `dist/` directory is different than
       # expected.
       - name: Compare Directories
