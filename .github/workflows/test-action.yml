@@ -35,13 +35,13 @@ jobs:
       - name: Test rpk installation (specific version)
         uses: ./
         with:
-          version: 23.2.1
+          version: 24.2.21
       - name: Verify rpk installation
         run: |
           rpk version
           which rpk
           # Verify the version matches what we requested
-          rpk version | grep -q "v23.2.1"
+          rpk --version | grep -q "24.2.21"
 
   test-arm64:
     name: Test on ARM64

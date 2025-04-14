@@ -1,4 +1,4 @@
-name: 'Install rpk'
+name: 'Setup rpk'
 description: 'Install the rpk binary from Redpanda'
 author: 'Redpanda Data'
 

@@ -1,6 +1,6 @@
 # setup-rpk
 
-[![Tests](https://github.com/redpanda-data/setup-rpk/actions/workflows/test.yml/badge.svg)](https://github.com/redpanda-data/setup-rpk/actions/workflows/test.yml)
+[![Tests](https://github.com/alexjbuck/setup-rpk/actions/workflows/ci.yml/badge.svg)](https://github.com/alexjbuck/setup-rpk/actions/workflows/ci.yml)
 ![Coverage](badges/coverage.svg)
 
 This GitHub Action installs the `rpk` binary from Redpanda. It automatically
@@ -11,7 +11,7 @@ detects the architecture of the runner and installs the appropriate version.
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: redpanda-data/install-rpk@v1
+  - uses: alexjbuck/setup-rpk@v1
     with:
       version: 'latest' # Optional, defaults to 'latest'
 ```
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: redpanda-data/install-rpk@v1
+      - uses: alexjbuck/setup-rpk@v1
         with:
           version: '1.2.3' # Will be converted to v1.2.3 in the download URL
       - run: rpk version
