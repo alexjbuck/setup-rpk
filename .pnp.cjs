@@ -30,7 +30,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@actions/core", "npm:1.11.1"],\
           ["@actions/exec", "npm:1.1.1"],\
-          ["@actions/http-client", "npm:2.2.3"],\
+          ["@actions/http-client", "npm:3.0.0"],\
           ["@eslint/compat", "virtual:a59133a6dadb4ff966d945859a5d10274293674b98d179e45b03a1ec9fd8dae2335b282aaf5674147511706aa1349beeea01f754af67f0eac6bb6baa98e6d759#npm:1.2.8"],\
           ["@eslint/eslintrc", "npm:3.3.1"],\
           ["@eslint/js", "npm:9.24.0"],\
@@ -130,6 +130,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@actions-http-client-npm-2.2.3-628748e0a3-13141b66a4.zip/node_modules/@actions/http-client/",\
         "packageDependencies": [\
           ["@actions/http-client", "npm:2.2.3"],\
+          ["tunnel", "npm:0.0.6"],\
+          ["undici", "npm:5.29.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:3.0.0", {\
+        "packageLocation": "./.yarn/cache/@actions-http-client-npm-3.0.0-517163f9d7-2d4452c7db.zip/node_modules/@actions/http-client/",\
+        "packageDependencies": [\
+          ["@actions/http-client", "npm:3.0.0"],\
           ["tunnel", "npm:0.0.6"],\
           ["undici", "npm:5.29.0"]\
         ],\
@@ -6504,7 +6513,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@actions/core", "npm:1.11.1"],\
           ["@actions/exec", "npm:1.1.1"],\
-          ["@actions/http-client", "npm:2.2.3"],\
+          ["@actions/http-client", "npm:3.0.0"],\
           ["@eslint/compat", "virtual:a59133a6dadb4ff966d945859a5d10274293674b98d179e45b03a1ec9fd8dae2335b282aaf5674147511706aa1349beeea01f754af67f0eac6bb6baa98e6d759#npm:1.2.8"],\
           ["@eslint/eslintrc", "npm:3.3.1"],\
           ["@eslint/js", "npm:9.24.0"],\
