@@ -3535,7 +3535,7 @@ const RAW_RUNTIME_STATE =
           ["graceful-fs", "npm:4.2.11"],\
           ["is-stream", "npm:2.0.1"],\
           ["lazystream", "npm:1.0.1"],\
-          ["lodash", "npm:4.17.21"],\
+          ["lodash", "npm:4.18.1"],\
           ["normalize-path", "npm:3.0.0"],\
           ["readable-stream", "npm:4.7.0"]\
         ],\
@@ -7247,10 +7247,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["lodash", [\
-      ["npm:4.17.21", {\
-        "packageLocation": "./.yarn/cache/lodash-npm-4.17.21-6382451519-d8cbea072b.zip/node_modules/lodash/",\
+      ["npm:4.18.1", {\
+        "packageLocation": "./.yarn/cache/lodash-npm-4.18.1-a64c3070ac-757228fc68.zip/node_modules/lodash/",\
         "packageDependencies": [\
-          ["lodash", "npm:4.17.21"]\
+          ["lodash", "npm:4.18.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -8136,7 +8136,7 @@ const RAW_RUNTIME_STATE =
       ["npm:0.9.2", {\
         "packageLocation": "./.yarn/cache/quibble-npm-0.9.2-9dd499cf72-6fb25fde30.zip/node_modules/quibble/",\
         "packageDependencies": [\
-          ["lodash", "npm:4.17.21"],\
+          ["lodash", "npm:4.18.1"],\
           ["quibble", "npm:0.9.2"],\
           ["resolve", "patch:resolve@npm%3A1.22.10#optional!builtin<compat/resolve>::version=1.22.10&hash=c3c19d"]\
         ],\
@@ -9377,7 +9377,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-visitor-keys", "npm:3.4.3"],\
           ["espree", "npm:9.6.1"],\
           ["esquery", "npm:1.6.0"],\
-          ["lodash", "npm:4.17.21"],\
+          ["lodash", "npm:4.18.1"],\
           ["semver", "npm:7.7.1"],\
           ["vue-eslint-parser", "virtual:aebff99bda7fa07c4721fb1f737921b1bdc111c4ce21d1faf394aeb70890290ac85395c34ef17ebcac60147f5f4c942cb746774aea55f3cd3e5ae671fc61b3ec#npm:9.4.3"]\
         ],\
