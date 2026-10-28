@@ -5907,10 +5907,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["http-cache-semantics", [\
-      ["npm:4.1.1", {\
-        "packageLocation": "./.yarn/cache/http-cache-semantics-npm-4.1.1-1120131375-ce1319b8a3.zip/node_modules/http-cache-semantics/",\
+      ["npm:4.3.0", {\
+        "packageLocation": "./.yarn/cache/http-cache-semantics-npm-4.3.0-ee45f76976-b9668e271b.zip/node_modules/http-cache-semantics/",\
         "packageDependencies": [\
-          ["http-cache-semantics", "npm:4.1.1"]\
+          ["http-cache-semantics", "npm:4.3.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7337,7 +7337,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@npmcli/agent", "npm:3.0.0"],\
           ["cacache", "npm:19.0.1"],\
-          ["http-cache-semantics", "npm:4.1.1"],\
+          ["http-cache-semantics", "npm:4.3.0"],\
           ["make-fetch-happen", "npm:14.0.3"],\
           ["minipass", "npm:7.1.2"],\
           ["minipass-fetch", "npm:4.0.1"],\
