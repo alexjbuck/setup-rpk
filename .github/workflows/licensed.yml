@@ -25,10 +25,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      # Credentials are kept so the workflow_dispatch path can push license updates.
+      - name: Checkout # zizmor: ignore[artipacked]
         id: checkout
-        # Credentials are kept so the workflow_dispatch path can push license updates.
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 zizmor: ignore[artipacked]
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Setup Node.js
         id: setup-node
