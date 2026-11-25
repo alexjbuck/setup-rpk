@@ -27,7 +27,7 @@
     "esbuild": ">=0.25.2",
     "tsx": ">=4.19.3",
     "typescript": "5.8.3",
-    "@typescript-eslint/utils": "8.69.0",
+    "@typescript-eslint/utils": "8.73.0",
     "@typescript-eslint/typescript-estree": "8.0.0"
   },
   "scripts": {
@@ -57,9 +57,9 @@
     "@jest/globals": "^29.7.0",
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.3",
-    "@typescript-eslint/eslint-plugin": "8.69.0",
-    "@typescript-eslint/parser": "8.69.0",
-    "@typescript-eslint/utils": "8.69.0",
+    "@typescript-eslint/eslint-plugin": "8.73.0",
+    "@typescript-eslint/parser": "8.73.0",
+    "@typescript-eslint/utils": "8.73.0",
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
