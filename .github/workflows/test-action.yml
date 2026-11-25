@@ -10,14 +10,15 @@ on:
 permissions:
   contents: read
   packages: read
-  statuses: write
 
 jobs:
   test-latest:
     name: Test Latest Version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Test rpk installation (latest)
         uses: ./
         with:
@@ -31,7 +32,9 @@ jobs:
     name: Test Specific Version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Test rpk installation (specific version)
         uses: ./
         with:
@@ -47,9 +50,11 @@ jobs:
     name: Test on ARM64
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3.7.0
       - name: Test rpk installation on ARM64
         uses: ./
         with:
