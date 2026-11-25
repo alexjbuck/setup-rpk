@@ -1,6 +1,6 @@
 name: 'Setup rpk'
 description: 'Install the rpk binary from Redpanda'
-author: 'Redpanda Data'
+author: 'Alexander Buck'
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
